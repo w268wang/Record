@@ -1,6 +1,4 @@
-package record;
-
-
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -8,9 +6,12 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+import datastruct.Person;
+
 public class DisplayTableFrame extends JDialog implements ActionListener {
-	
-	private static final int WIDTH = 1400;
+
+    private static final long serialVersionUID = 6599111164840448485L;
+    private static final int WIDTH = 1400;
 	private static final int HEIGHT = 400;
 	
 	private JTable textTable;
@@ -38,23 +39,23 @@ public class DisplayTableFrame extends JDialog implements ActionListener {
 
         Object[][] data = new Object[thisData.size()][17];
         for(int i=0; i<thisData.size(); i++) {
-        	data[i][0] = thisData.get(i).ID;
-        	data[i][1] = thisData.get(i).lastname;
-        	data[i][2] = thisData.get(i).firstname;
-        	data[i][3] = thisData.get(i).gender;
-        	data[i][4] = thisData.get(i).eMail;
-        	data[i][5] = thisData.get(i).age;
-        	data[i][6] = thisData.get(i).dateofbirth.year;
-        	data[i][7] = thisData.get(i).dateofbirth.month;
-        	data[i][8] = thisData.get(i).dateofbirth.day;
-        	data[i][9] = thisData.get(i).phoneNumber.homeNumber;
-        	data[i][10] = thisData.get(i).phoneNumber.workNumber;
-        	data[i][11] = thisData.get(i).phoneNumber.mobileNumber;
-        	data[i][12] = thisData.get(i).address.nation;
-        	data[i][13] = thisData.get(i).address.province;
-        	data[i][14] = thisData.get(i).address.city;
-        	data[i][15] = thisData.get(i).address.addr;
-        	data[i][16] = thisData.get(i).result;
+        	data[i][0] = thisData.get(i).getID();
+        	data[i][1] = thisData.get(i).getLastname();
+        	data[i][2] = thisData.get(i).getFirstname();
+        	data[i][3] = thisData.get(i).getGender();
+        	data[i][4] = thisData.get(i).getEMail();
+        	data[i][5] = thisData.get(i).getAge();
+        	data[i][6] = thisData.get(i).getDateOfBirth().getYear();
+        	data[i][7] = thisData.get(i).getDateOfBirth().getMonth();
+        	data[i][8] = thisData.get(i).getDateOfBirth().getDay();
+        	data[i][9] = thisData.get(i).getPhoneNumber().getHomeNumber();
+        	data[i][10] = thisData.get(i).getPhoneNumber().getWorkNumber();
+        	data[i][11] = thisData.get(i).getPhoneNumber().getMobileNumber();
+        	data[i][12] = thisData.get(i).getAddress().getNation();
+        	data[i][13] = thisData.get(i).getAddress().getProvince();
+        	data[i][14] = thisData.get(i).getAddress().getCity();
+        	data[i][15] = thisData.get(i).getAddress().getAddr();
+        	data[i][16] = thisData.get(i).getResult();
         }
 
         textTable = new JTable(data, columnNames);
@@ -80,8 +81,5 @@ public class DisplayTableFrame extends JDialog implements ActionListener {
 	
 	class Mouseclicked extends MouseAdapter{}
 	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void actionPerformed(ActionEvent e) {}
 }

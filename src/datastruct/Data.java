@@ -1,4 +1,4 @@
-package record;
+package datastruct;
 
 
 import java.util.*;
@@ -13,15 +13,15 @@ public class Data {
 	private static int thisNameInd = 0;
 	private static int lastNameInd = 0;
 	
-	static ArrayList<Person> data= new ArrayList<Person>();
+	private static ArrayList<Person> data= new ArrayList<Person>();
 	
 	public Data(int nameInd) {
 		//copy things from disk
 		if(nameInd<0) {
 			nameInd = 0;
-			for(int i=0; i<Integer.MAX_VALUE; i++){
+			for(int i=0; i<Integer.MAX_VALUE; i++) {
 				File f = new File(HOMEPATH+"david/out"+i+"."+TYPE);
-				if(!f.exists()){
+				if(!f.exists()) {
 					nameInd = i;
 					break;
 				}
@@ -90,16 +90,16 @@ public class Data {
 				Data.addElement(temp);
 			}
 			br.close();
-		}catch (Exception e){//Catch exception if any
+		} catch (Exception e) {//Catch exception if any
 		      System.err.println("COPYError: " + e.getMessage());
 		}
+
 		int acc = 0;
 
 		try{
-			acc = 0;
-			for(int i=0; i<Integer.MAX_VALUE; i++){
+			for(int i=0; i<Integer.MAX_VALUE; i++) {
 				File f = new File(HOMEPATH+"david/out"+i+"."+TYPE);
-				if(!f.exists()){
+				if(!f.exists()) {
 					acc = i-1;
 					break;
 				}
@@ -111,16 +111,16 @@ public class Data {
 		
 	}
 	
-	static int length = data.size();
+	static int length = getData().size();
 	
 	public void save(int nameInd, String name) {
 		//copy things to disk
 		File dir = new File(HOMEPATH+"david");
 		File ind = new File(HOMEPATH+"david/Index."+TYPE);
-		if(!dir.exists()||!dir.isDirectory()){
+		if(!dir.exists()||!dir.isDirectory()) {
 			new File(HOMEPATH+"david").mkdirs();
 		}
-		if(!ind.exists()){
+		if(!ind.exists()) {
 			try{
 			    // Create file 
 			    FileWriter fstream = new FileWriter(HOMEPATH+"david/Index."+TYPE);
@@ -134,16 +134,16 @@ public class Data {
 			    out.write("lastNameInd "+lastNameInd);
 			    //Close the output stream
 			    out.close();
-			}catch (Exception e){//Catch exception if any
+			} catch (Exception e) {//Catch exception if any
 			      System.err.println("Error: " + e.getMessage());
 			}
 		}
 		
-		if(nameInd<0){
+		if(nameInd<0) {
 			nameInd = 0;
-			for(int i=0; i<Integer.MAX_VALUE; i++){
+			for(int i=0; i<Integer.MAX_VALUE; i++) {
 				File f = new File(HOMEPATH+"david/out"+i+"."+TYPE);
-				if(!f.exists()){
+				if(!f.exists()) {
 					nameInd = i;
 					break;
 				}
@@ -161,7 +161,7 @@ public class Data {
 		    out.newLine();
 		    out.write("Name "+name);
 		    out.newLine();
-		    out.write("DataSize "+data.size());
+		    out.write("DataSize "+getData().size());
 		    out.newLine();
 		    out.write("*********************************");
 		    out.newLine();
@@ -171,25 +171,25 @@ public class Data {
 			}*/
 		    
 		    for(int i=0; i<length; i++) {
-		    	out.write(""+data.get(i).ID);
+		    	out.write(""+getData().get(i).id);
 		    	out.newLine();
-		    	out.write(data.get(i).lastname);
+		    	out.write(getData().get(i).lastname);
 		    	out.newLine();
-		    	out.write(data.get(i).firstname);
+		    	out.write(getData().get(i).firstname);
 		    	out.newLine();
-		    	out.write(data.get(i).gender);
+		    	out.write(getData().get(i).gender);
 		    	out.newLine();
-		    	out.write(""+data.get(i).age);
+		    	out.write(""+getData().get(i).age);
 		    	out.newLine();
-		    	out.write(data.get(i).eMail);
+		    	out.write(getData().get(i).eMail);
 		    	out.newLine();
-		    	out.write(data.get(i).phoneNumber.print());
+		    	out.write(getData().get(i).phoneNumber.print());
 		    	out.newLine();
-		    	out.write(data.get(i).address.print());
+		    	out.write(getData().get(i).address.print());
 		    	out.newLine();
-		    	out.write(data.get(i).dateofbirth.print());
+		    	out.write(getData().get(i).dateofbirth.print());
 		    	out.newLine();
-		    	out.write(data.get(i).result);
+		    	out.write(getData().get(i).result);
 		    	out.newLine();
 			}
 		    
@@ -203,14 +203,14 @@ public class Data {
 			}
 			 
 			br.close();
-		}catch (Exception e){//Catch exception if any
+		}catch (Exception e) {//Catch exception if any
 		      System.err.println("Error: " + e.getMessage());
 		}
 		try{
 			File file = new File(HOMEPATH+"david/Index."+TYPE);
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String line = null;
-			while((line = br.readLine())!= null ){
+			while((line = br.readLine())!= null ) {
 			        // \\s+ means any number of whitespaces between tokens
 			    String [] tokens = line.split("\\s+");
 			    if(tokens[0]=="lastNameInd") 
@@ -218,7 +218,7 @@ public class Data {
 			    	
 			}
 			br.close();
-		} catch (Exception ex){}
+		} catch (Exception ex) {}
 		if(lastNameInd<nameInd) {
 			try{
 			    FileWriter fstream = new FileWriter(HOMEPATH+"david/Index."+TYPE);
@@ -232,7 +232,7 @@ public class Data {
 			    out.write("lastNameInd "+nameInd);
 			    //Close the output stream
 			    out.close();
-			}catch (Exception e){//Catch exception if any
+			}catch (Exception e) {//Catch exception if any
 			      System.err.println("Error: " + e.getMessage());
 			}
 		}
@@ -271,9 +271,9 @@ public class Data {
 
 		try{
 			nameInd = 0;
-			for(int i=0; i<Integer.MAX_VALUE; i++){
+			for(int i=0; i<Integer.MAX_VALUE; i++) {
 				File f = new File("D:/david/out"+i+"."+TYPE);
-				if(!f.exists()){
+				if(!f.exists()) {
 					nameInd = i;
 					break;
 				}
@@ -297,7 +297,7 @@ public class Data {
 		    out.write("lastNameInd "+lastNameInd);
 		    //Close the output stream
 		    out.close();
-		}catch (Exception e){//Catch exception if any
+		}catch (Exception e) {//Catch exception if any
 		      System.err.println("Error: " + e.getMessage());
 		}*/
 		return lastNameInd;
@@ -305,9 +305,9 @@ public class Data {
 	}
 	
 	public static void addElement(Person p) {
-		data.add(p);
+		getData().add(p);
 		
-		Collections.sort(data, new Comparator<Person>() {
+		Collections.sort(getData(), new Comparator<Person>() {
 			@Override
 	        public int compare(Person per1, Person per2)
 	        {
@@ -318,28 +318,28 @@ public class Data {
 	            	result = -1;
 	            else {
 		    		try {result = per1.lastname.compareToIgnoreCase(per2.lastname);}
-		    		catch(Exception e){
+		    		catch(Exception e) {
 		    			String QWE = "";
 		    			result = -1;
 		    			try{per1.lastname.compareTo(QWE);}
-		    			catch(Exception ex){result = 1;}
+		    			catch(Exception ex) {result = 1;}
 		    		}
 		    		if(result == 0) {
 		    			try {result = per1.firstname.compareToIgnoreCase(per2.firstname);}
-			    		catch(Exception e){
+			    		catch(Exception e) {
 			    			String QWE = "";
 			    			result = -1;
 			    			try{per1.firstname.compareTo(QWE);}
-			    			catch(Exception ex){result = 1;}
+			    			catch(Exception ex) {result = 1;}
 			    		}
 		    		}
 	            }
 	    		return result;
 	        }
 	    });
-		length = data.size();
+		length = getData().size();
 		for(int i=0; i<length; i++) {
-			data.get(i).setID(i);
+			getData().get(i).setID(i);
 		}
 		System.out.println("The length of this arraylist is now "+length);
 		
@@ -347,13 +347,13 @@ public class Data {
 	public static void deleteElement(int ID) {
 		Person temp = null;
 		for(int i=0; i<length; i++) {
-			if(data.get(i).ID==ID) {
-				temp = data.get(i);
+			if(getData().get(i).id==ID) {
+				temp = getData().get(i);
 				break;
 			}
 		}
-		data.remove(temp);
-		Collections.sort(data, new Comparator<Person>() {
+		getData().remove(temp);
+		Collections.sort(getData(), new Comparator<Person>() {
 			@Override
 	        public int compare(Person per1, Person per2)
 	        {
@@ -364,32 +364,32 @@ public class Data {
 	            	result = -1;
 	            else {
 		    		try {result = per1.lastname.compareToIgnoreCase(per2.lastname);}
-		    		catch(Exception e){
+		    		catch(Exception e) {
 		    			String QWE = "";
 		    			result = -1;
 		    			try{per1.lastname.compareTo(QWE);}
-		    			catch(Exception ex){result = 1;}
+		    			catch(Exception ex) {result = 1;}
 		    		}
 		    		if(result == 0) {
 		    			try {result = per1.firstname.compareToIgnoreCase(per2.firstname);}
-			    		catch(Exception e){
+			    		catch(Exception e) {
 			    			String QWE = "";
 			    			result = -1;
 			    			try{per1.firstname.compareTo(QWE);}
-			    			catch(Exception ex){result = 1;}
+			    			catch(Exception ex) {result = 1;}
 			    		}
 		    		}
 	            }
 	    		return result;
 	        }
 	    });
-		length = data.size();
+		length = getData().size();
 		for(int i=0; i<length; i++) {
-			data.get(i).setID(i);
+			getData().get(i).setID(i);
 		}
 		System.out.println("The length of this arraylist is "+length);
 	}
-	public static ArrayList fnameSearch(String firstname, ArrayList<Person> thisList) {
+	public static ArrayList<Person> fnameSearch(String firstname, ArrayList<Person> thisList) {
 		
 		ArrayList<Person> fname= new ArrayList<Person>();
 		
@@ -401,7 +401,7 @@ public class Data {
 		
 		return fname;
 	}
-	public static ArrayList lnameSearch(String lastname, ArrayList<Person> thisList) {
+	public static ArrayList<Person> lnameSearch(String lastname, ArrayList<Person> thisList) {
 
 		ArrayList<Person> lname= new ArrayList<Person>();
 		
@@ -413,7 +413,7 @@ public class Data {
 		
 		return lname;
 	}
-	public static ArrayList genderSearch(String gender, ArrayList<Person> thisList) {
+	public static ArrayList<Person> genderSearch(String gender, ArrayList<Person> thisList) {
 
 		ArrayList<Person> gend= new ArrayList<Person>();
 		
@@ -425,7 +425,7 @@ public class Data {
 		
 		return gend;
 	}
-	public ArrayList ageSearch(int age, ArrayList<Person> thisList) {
+	public ArrayList<Person> ageSearch(int age, ArrayList<Person> thisList) {
 
 		ArrayList<Person> lage= new ArrayList<Person>();
 		
@@ -437,7 +437,7 @@ public class Data {
 		
 		return lage;
 	}
-	public ArrayList ageLessThanOrEqual(int age, ArrayList<Person> thisList) {
+	public ArrayList<Person> ageLessThanOrEqual(int age, ArrayList<Person> thisList) {
 
 		ArrayList<Person> lage= new ArrayList<Person>();
 		
@@ -449,7 +449,7 @@ public class Data {
 		
 		return lage;
 	}
-	public ArrayList ageBiggerThanOrEqual(int age, ArrayList<Person> thisList) {
+	public ArrayList<Person> ageBiggerThanOrEqual(int age, ArrayList<Person> thisList) {
 
 	ArrayList<Person> lage= new ArrayList<Person>();
 	
@@ -461,7 +461,7 @@ public class Data {
 	
 	return lage;
 	}
-	public ArrayList citySearch(String city, ArrayList<Person> thisList) {
+	public ArrayList<Person> citySearch(String city, ArrayList<Person> thisList) {
 
 		ArrayList<Person> lcity= new ArrayList<Person>();
 		
@@ -476,97 +476,105 @@ public class Data {
 	public String printresult(ArrayList<Person> arr) {
 		String s = "";
 		
-		for(int i=0; i<arr.size(); i++){
+		for (int i=0; i<arr.size(); i++) {
 			s = s + arr.get(i).print() + "\n";
 		}
 		
 		return s;
 	}
 	
-	public static ArrayList fnameSearch(String firstname) {
+	public static ArrayList<Person> fnameSearch(String firstname) {
 		
 		ArrayList<Person> fname= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).firstname.compareToIgnoreCase(firstname)==0) {
-				fname.add(data.get(i));
+			if(getData().get(i).firstname.compareToIgnoreCase(firstname)==0) {
+				fname.add(getData().get(i));
 			}
 		}
 		
 		return fname;
 	}
-	public static ArrayList lnameSearch(String lastname) {
+	public static ArrayList<Person> lnameSearch(String lastname) {
 
 		ArrayList<Person> lname= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).lastname.compareToIgnoreCase(lastname)==0) {
-				lname.add(data.get(i));
+			if(getData().get(i).lastname.compareToIgnoreCase(lastname)==0) {
+				lname.add(getData().get(i));
 			}
 		}
 		
 		return lname;
 	}
-	public static ArrayList genderSearch(String gender) {
+	public static ArrayList<Person> genderSearch(String gender) {
 
 		ArrayList<Person> gend= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).gender.compareToIgnoreCase(gender)==0) {
-				gend.add(data.get(i));
+			if(getData().get(i).gender.compareToIgnoreCase(gender)==0) {
+				gend.add(getData().get(i));
 			}
 		}
 		
 		return gend;
 	}
-	public ArrayList ageSearch(int age) {
+	public ArrayList<Person> ageSearch(int age) {
 
 		ArrayList<Person> lage= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).age==age) {
-				lage.add(data.get(i));
+			if(getData().get(i).age==age) {
+				lage.add(getData().get(i));
 			}
 		}
 		
 		return lage;
 	}
-	public ArrayList ageLessThanOrEqual(int age) {
+	public ArrayList<Person> ageLessThanOrEqual(int age) {
 
 		ArrayList<Person> lage= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).age<=age) {
-				lage.add(data.get(i));
+			if(getData().get(i).age<=age) {
+				lage.add(getData().get(i));
 			}
 		}
 		
 		return lage;
 	}
-	public ArrayList ageBiggerThanOrEqual(int age) {
+	public ArrayList<Person> ageBiggerThanOrEqual(int age) {
 
 		ArrayList<Person> lage= new ArrayList<Person>();
 	
 		for(int i=0; i<length; i++) {
-			if(data.get(i).age>=age) {
-				lage.add(data.get(i));
+			if(getData().get(i).age>=age) {
+				lage.add(getData().get(i));
 			}
 		}
 	
 		return lage;
 	}
-	public ArrayList citySearch(String city) {
+	public ArrayList<Person> citySearch(String city) {
 
 		ArrayList<Person> lcity= new ArrayList<Person>();
 		
 		for(int i=0; i<length; i++) {
-			if(data.get(i).address.city.compareToIgnoreCase(city)==0) {
-				lcity.add(data.get(i));
+			if(getData().get(i).address.city.compareToIgnoreCase(city)==0) {
+				lcity.add(getData().get(i));
 			}
 		}
 		
 		return lcity;
 	}
+
+    public static ArrayList<Person> getData() {
+        return data;
+    }
+
+    public static void setData(ArrayList<Person> data) {
+        Data.data = data;
+    }
 }
 			
 /*

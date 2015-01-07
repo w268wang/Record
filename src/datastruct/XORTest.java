@@ -1,10 +1,15 @@
-package record;
+package datastruct;
 
 
 import sun.misc.BASE64Encoder;
 
 import sun.misc.BASE64Decoder;
 
+/**
+ * Intended to be used for encrypt and decrypt data
+ * @author Weijie Wang
+ *
+ */
 public class XORTest {
 
   public static void main(String args[]){

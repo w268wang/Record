@@ -1,5 +1,4 @@
-package record;
-
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -7,11 +6,11 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import java.io.*;
-import java.util.*;
 
 public class LoadFrame extends JDialog implements ActionListener {
-	
-	private static final int WIDTH = 190;
+
+    private static final long serialVersionUID = 7157883588675034571L;
+    private static final int WIDTH = 190;
 	private static final int HEIGHT = 120;
 	
 	private static final String TYPE = "wwj";
@@ -28,7 +27,7 @@ public class LoadFrame extends JDialog implements ActionListener {
 	String[] nameInd0;
 	JComboBox <String> nameIndAcc;
 	
-	LoadFrame(Frame owner, int lastNameInd) {
+	public LoadFrame(Frame owner, int lastNameInd) {
 		super(owner,"Load",true);
 		setSize(WIDTH,HEIGHT);
         setResizable(false);
@@ -101,15 +100,16 @@ public class LoadFrame extends JDialog implements ActionListener {
 			try{
 				File file = new File(HOMEPATH+"david/out"+nameInd+"."+TYPE);
 				System.out.println(nameInd);
-				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 				String line = null;
-				while((line = br.readLine())!= null ){
+				while((line = bufferedReader.readLine())!= null ){
 				        // \\s+ means any number of whitespaces between tokens
 				    String [] tokens = line.split("\\s+");
-				    if(tokens[0].compareTo("Name")==0) 
+				    if(tokens[0].compareTo("Name")==0) {
 				    	name = line.substring(5);
-				    	
+				    }
 				}
+				bufferedReader.close();
 			} catch (Exception ex){}
 			
 			fileName.setText(name);
@@ -131,9 +131,8 @@ public class LoadFrame extends JDialog implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-
-		LoadFrame loadFrame = new LoadFrame(null, 8);
-
+		@SuppressWarnings("unused")
+        LoadFrame loadFrame = new LoadFrame(null, 8);
 	}
 
 }

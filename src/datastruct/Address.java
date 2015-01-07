@@ -1,4 +1,4 @@
-package record;
+package datastruct;
 
 
 public class Address {
@@ -21,5 +21,21 @@ public class Address {
 	public String print() {
 		String temp = nation+" "+province+" "+city+" "+addr;
 		return temp;
+	}
+
+	public String getNation() {
+	    return nation;
+	}
+
+	public String getProvince() {
+	    return province;
+	}
+
+	public String getCity() {
+	    return city;
+	}
+
+	public String getAddr() {
+	    return addr;
 	}
 }

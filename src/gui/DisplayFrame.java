@@ -1,18 +1,14 @@
-package record;
-
-
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.io.*;
-import java.util.*;
-
 public class DisplayFrame extends JDialog implements ActionListener {
-	
-	private static final int WIDTH = 800;
+
+    private static final long serialVersionUID = 6659563193616407129L;
+    private static final int WIDTH = 800;
 	private static final int HEIGHT = 500;
 	
 	private JTextArea textArea;
@@ -48,13 +44,12 @@ public class DisplayFrame extends JDialog implements ActionListener {
 	
 	class Mouseclicked extends MouseAdapter{}
 	
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	@Override
+	public void actionPerformed(ActionEvent e) {}
 	
 	public static void main(String[] args) {
-		DisplayFrame therecord = new DisplayFrame(null, "as\nfaas\nasdasa\nasdas\nas\na\nas\nas\na");
+		@SuppressWarnings("unused")
+        DisplayFrame therecord = new DisplayFrame(null, "as\nfaas\nasdasa\nasdas\nas\na\nas\nas\na");
 	}
 
 }

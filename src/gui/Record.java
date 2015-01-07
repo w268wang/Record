@@ -1,18 +1,21 @@
-package record;
-
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
+import datastruct.Data;
+import datastruct.Person;
+import datastruct.SearchFrame;
+
 import java.io.*;
 import java.util.*;
 
-
 public class Record extends JFrame implements ActionListener{
-	
-	private boolean savable = false;
+
+    private static final long serialVersionUID = -8771660412887724578L;
+    private boolean savable = false;
 	private int nameInd;
 	private String dataName = "";
 	private final String TYPE = "wwj";
@@ -102,6 +105,7 @@ public class Record extends JFrame implements ActionListener{
             
 	}
 	
+    @SuppressWarnings("unused")
     public void actionPerformed(ActionEvent e) { //where actions happen
 		
     	if(!savable) {
@@ -123,7 +127,7 @@ public class Record extends JFrame implements ActionListener{
 			AddItemFrame tempadd = new AddItemFrame(null, "add");
 			if(tempadd.getState()){
 				Person temp = tempadd.getResult();
-				thisData.addElement(temp);
+				Data.addElement(temp);
 				System.out.println("add record");
 			}
 			return;
@@ -131,11 +135,11 @@ public class Record extends JFrame implements ActionListener{
 		if (cmdx.equals("modify item")){
 		    
 			int ID = -1;
-		    ModifyItemFrame modifyframe = new ModifyItemFrame(null, thisData.data);
+		    ModifyItemFrame modifyframe = new ModifyItemFrame(null, Data.getData());
 		    if(modifyframe.getState()){
 			    ID = modifyframe.getValue();
-			    thisData.deleteElement(ID);
-			    thisData.addElement(modifyframe.getResult());
+			    Data.deleteElement(ID);
+			    Data.addElement(modifyframe.getResult());
 				System.out.println("modify");
 		    }
 		    return;
@@ -143,38 +147,38 @@ public class Record extends JFrame implements ActionListener{
 		if (cmdx.equals("delete item")){
 		    
 		    int ID = -1;
-		    DeleteFrame deleteframe = new DeleteFrame(null, thisData.data);
+		    DeleteFrame deleteframe = new DeleteFrame(null, Data.getData());
 		    if(deleteframe.getState()){
 			    ID = deleteframe.getValue();
-			    thisData.deleteElement(ID);
+			    Data.deleteElement(ID);
 				System.out.println("delete");
 		    }
 		    return;
 		}
 		if (cmdx.equals("search")){
 		    
-			String finalResult = null;
+//			String finalResult = null;
 			
 			SearchFrame searchframe = new SearchFrame(null);
 			if(searchframe.getState()) {
 				String[][] Result = searchframe.getresult();
 				if(Result[0][0]!=null&&Result[0][0].compareTo("null")==0){
-					DisplayTableFrame displaytableframe = new DisplayTableFrame(null, thisData.data);
+					DisplayTableFrame displaytableframe = new DisplayTableFrame(null, Data.getData());
 				} else {
 					
-					ArrayList<Person> searchResult=thisData.data;
+					ArrayList<Person> searchResult=Data.getData();
 					
 					if(Result[0][0]!=null)
-						searchResult = thisData.lnameSearch(Result[0][1], searchResult);
+						searchResult = Data.lnameSearch(Result[0][1], searchResult);
 					if(Result[1][0]!=null)
-						searchResult = thisData.fnameSearch(Result[1][1], searchResult);
+						searchResult = Data.fnameSearch(Result[1][1], searchResult);
 					if(Result[2][0]!=null)
 						searchResult = thisData.ageSearch(Integer.valueOf(Result[2][1]).intValue()
 								, searchResult);
 					if(Result[3][0]!=null)
 						searchResult = thisData.citySearch(Result[3][1], searchResult);
 					if(Result[4][0]!=null)
-						searchResult = thisData.genderSearch(Result[4][1], searchResult);
+						searchResult = Data.genderSearch(Result[4][1], searchResult);
 					DisplayTableFrame displaytableframe = new DisplayTableFrame(null, searchResult);
 					//try{finalResult = thisData.printresult(searchResult);}
 					//catch(Exception ex){finalResult="Error!";}finally{}
@@ -190,9 +194,9 @@ public class Record extends JFrame implements ActionListener{
 		}
 		if (cmdx.equals("info")){
 			
-			int total = thisData.data.size();
-			int maleNum = thisData.genderSearch("male").size();
-			int femaleNum = thisData.genderSearch("female").size();
+			int total = Data.getData().size();
+			int maleNum = Data.genderSearch("male").size();
+			int femaleNum = Data.genderSearch("female").size();
 			int adultNum = thisData.ageBiggerThanOrEqual(17).size();
 			JOptionPane.showMessageDialog(null,"This file has "+total
 					+ " item(s).\n" + maleNum
@@ -258,9 +262,10 @@ public class Record extends JFrame implements ActionListener{
 			int lastNameInd = 0;
 			try{
 				File file = new File(HOMEPATH+"david/Index."+TYPE);
-				BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+				BufferedReader bufferedReader = new BufferedReader(
+				        new InputStreamReader(new FileInputStream(file)));
 				String line = null;
-				while((line = br.readLine())!= null ){
+				while((line = bufferedReader.readLine())!= null ){
 				        // \\s+ means any number of whitespaces between tokens
 				    String [] tokens = line.split("\\s+");
 				    if(tokens[0].compareTo("lastNameInd")==0) {
@@ -269,6 +274,7 @@ public class Record extends JFrame implements ActionListener{
 				    }
 				    	
 				}
+				bufferedReader.close();
 			} catch (Exception ex){}
 			
 			/*int lastNameInd = 0;
@@ -330,15 +336,16 @@ public class Record extends JFrame implements ActionListener{
 				nameInd = findNameInd.getValue();
 				try{
 					File file = new File(HOMEPATH+"david/out"+nameInd+"."+TYPE);
-					BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+					BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 					String line = null;
-					while((line = br.readLine())!= null ){
+					while((line = bufferedReader.readLine())!= null ){
 					        // \\s+ means any number of whitespaces between tokens
 					    String [] tokens = line.split("\\s+");
 					    if(tokens[0].compareTo("Name")==0) 
 					    	dataName = line.substring(5);
 					    	
 					}
+					bufferedReader.close();
 				} catch (Exception ex){}
 				JOptionPane.showMessageDialog(null,"Database "+nameInd+": "+dataName+ " is choosed!");
 				thisData= new Data(nameInd);
@@ -393,7 +400,8 @@ public class Record extends JFrame implements ActionListener{
     }
 	
 	public static void main(String[] args) {
-		Record therecord = new Record();
+		@SuppressWarnings("unused")
+        Record therecord = new Record();
 	}
 
 }

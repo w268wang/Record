@@ -1,4 +1,4 @@
-package record;
+package datastruct;
 
 public class PhoneNumber {
 
@@ -19,6 +19,18 @@ public class PhoneNumber {
 	public String print() {
 		String temp = homeNumber+" "+workNumber+" "+mobileNumber;
 		return temp;
+	}
+
+	public String getHomeNumber() {
+	    return homeNumber;
+	}
+
+	public String getWorkNumber() {
+	    return workNumber;
+	}
+
+	public  String getMobileNumber() {
+	    return mobileNumber;
 	}
 }
 

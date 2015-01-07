@@ -1,4 +1,4 @@
-package record;
+package datastruct;
 
 
 public class MyDate {
@@ -19,5 +19,16 @@ public class MyDate {
 		String temp = year+" - "+month+" - "+day;
 		return temp;
 	}
-	
+
+	public int getYear() {
+	    return year;
+	}
+
+	public int getMonth() {
+	    return month;
+	}
+
+	public int getDay() {
+	    return day;
+	}
 }

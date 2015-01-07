@@ -1,17 +1,14 @@
-package record;
-
+package datastruct;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.io.*;
-import java.util.*;
-
 public class SearchFrame extends JDialog implements ActionListener {
-	
-	private static final int WIDTH = 400;
+
+    private static final long serialVersionUID = -2586964420946498641L;
+    private static final int WIDTH = 400;
 	private static final int HEIGHT = 200;
 	private boolean ok = false;
 	
@@ -282,7 +279,9 @@ public class SearchFrame extends JDialog implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-		SearchFrame therecord = new SearchFrame(null);
+	    // For test
+		@SuppressWarnings("unused")
+        SearchFrame therecord = new SearchFrame(null);
 	}
 
 }

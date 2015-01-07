@@ -1,15 +1,12 @@
-package record;
+package datastruct;
 /*
  * ID	lastname	firstname	gender	age	
  * e_mail	address		dateofbirth		result
  */
 
-
-
-
 public class Person {
 
-	int ID;
+	int id;
 	String lastname;
 	String firstname;
 	String gender; //"male"||"female"
@@ -23,7 +20,7 @@ public class Person {
 	public Person(int ID, String lastname, String firstname,
 			String gender, int age, String eMail, PhoneNumber phoneNumber, Address address,
 			MyDate dateofbirth, String result) {
-		this.ID = ID;
+		this.id = ID;
 		this.lastname = lastname;
 		this.firstname = firstname;
 		this.gender = gender;
@@ -34,6 +31,7 @@ public class Person {
 		this.dateofbirth = dateofbirth;
 		this.result = result;
 	}
+
 	/*public void print() {
 		System.out.println(ID+" "+lastname+" "+firstname+" "+gender
 				+" "+age+" "+eMail+" ");
@@ -41,13 +39,53 @@ public class Person {
 		dateofbirth.print();
 		System.out.println(result);
 	}*/
+
 	public String print() {
-		String temp = address.print();
-		return ID+" - "+lastname+" - "+firstname+" - "+gender
-				+" - "+age+" - "+eMail+" - "+phoneNumber.print()+" - "+address.print()+
-				" - "+dateofbirth.print()+" - "+result;
+		return id + " - " + lastname + " - " + firstname + " - " + gender
+				+ " - " + age + " - " + eMail + " - " + phoneNumber.print() + " - "
+				+ address.print() + " - " + dateofbirth.print() + " - " + result;
 	}
-	public void setID(int ID){
-		this.ID = ID;
+	public void setID(int id){
+		this.id = id;
+	}
+
+	public int getID() {
+	    return id;
+	}
+
+	public String getLastname() {
+	    return lastname;
+	}
+
+	public String getFirstname() {
+	    return firstname;
+	}
+
+	public String getGender() {
+	    return gender;
+	}
+
+	public int getAge() {
+	    return age;
+	}
+
+	public String getEMail() {
+	    return eMail;
+	}
+
+	public PhoneNumber getPhoneNumber() {
+	    return phoneNumber;
+	}
+
+	public Address getAddress() {
+	    return address;
+	}
+
+	public MyDate getDateOfBirth() {
+	    return dateofbirth;
+	}
+
+	public String getResult() {
+	    return result;
 	}
 }

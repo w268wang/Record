@@ -1,17 +1,18 @@
-package record;
-
+package gui;
 
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
-import java.io.*;
+import datastruct.Person;
+
 import java.util.*;
 
 public class DeleteFrame extends JDialog implements ActionListener {
-	
-	private static final int WIDTH = 190;
+
+    private static final long serialVersionUID = 1799659654528478417L;
+    private static final int WIDTH = 190;
 	private static final int HEIGHT = 120;
 	
 	//static final String TYPE = "w268wang";
@@ -29,7 +30,7 @@ public class DeleteFrame extends JDialog implements ActionListener {
 	
 	ArrayList<Person> data= new ArrayList<Person>();
 	
-	DeleteFrame(Frame owner, ArrayList<Person> thisData){
+	public DeleteFrame(Frame owner, ArrayList<Person> thisData){
 		
 		super(owner,"Load",true);
 		setSize(WIDTH,HEIGHT);
@@ -101,9 +102,9 @@ public class DeleteFrame extends JDialog implements ActionListener {
 			deleteButton.setEnabled(true);
 		
 			itemInd = Integer.valueOf(temp).intValue();
-			content = data.get(itemInd).ID+" "+data.get(itemInd).lastname
-					+" "+data.get(itemInd).firstname+" "+data.get(itemInd).gender
-					+" "+data.get(itemInd).result;
+			content = data.get(itemInd).getID() + " " + data.get(itemInd).getLastname()
+					+ " " + data.get(itemInd).getFirstname() + " "
+			        + data.get(itemInd).getGender() + " " + data.get(itemInd).getResult();
 			
 			information.setText(content);
 		}
@@ -124,9 +125,8 @@ public class DeleteFrame extends JDialog implements ActionListener {
 	}
 	
 	public static void main(String[] args) {
-
-		DeleteFrame deleteFrame = new DeleteFrame(null, new ArrayList<Person>());
-
+		@SuppressWarnings("unused")
+        DeleteFrame deleteFrame = new DeleteFrame(null, new ArrayList<Person>());
 	}
 
 	
